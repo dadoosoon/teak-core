@@ -36,7 +36,15 @@ public class CategoryService {
     }
   }
   
+  public Category findById(Integer id) {
+    return this.categoryDao.findById(id);
+  }
+  
   public List<Category> list() {
     return this.categoryDao.list();
+  }
+  
+  public Integer size() {
+    return (Integer)this.categoryDao.size();
   }
 }
