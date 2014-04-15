@@ -36,6 +36,14 @@ public class CategoryService {
     }
   }
   
+  public void deleteById(Integer id) {
+    this.categoryDao.deleteById(id);
+  }
+  
+  public void deleteAll() {
+    this.categoryDao.deleteAll();
+  }
+  
   public Category findById(Integer id) {
     return this.categoryDao.findById(id);
   }

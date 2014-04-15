@@ -28,6 +28,12 @@ public class CategoryDao extends BaseDao<Category>{
   private static final String SAVE_SQL = 
           "INSERT INTO t_category(name,description) VALUES(:name,:description)";
   
+  private static final String DELETE_BY_ID_SQL = 
+          "DELETE FROM t_category WHERE id=:id";
+  
+  private static final String DELETE_ALL_SQL = 
+          "DELETE FROM t_category";
+  
   private static final String FIND_BY_ID_SQL = 
           "SELECT id,name,description FROM t_category WHERE id=:id LIMIT 1";
   
@@ -56,6 +62,18 @@ public class CategoryDao extends BaseDao<Category>{
     this.jdbcTemplate.update(SAVE_SQL, sps, holder);
     category.setId(holder.getKey().intValue());
     return category;
+  }
+  
+  @Override
+  public void deleteById(Serializable id) {
+    MapSqlParameterSource sps = new MapSqlParameterSource();
+    sps.addValue("id", id);
+    this.jdbcTemplate.update(DELETE_BY_ID_SQL, sps);
+  }
+  
+  @Override
+  public void deleteAll() {
+    this.jdbcTemplate.update(DELETE_ALL_SQL, (MapSqlParameterSource)null);
   }
   
   @Override

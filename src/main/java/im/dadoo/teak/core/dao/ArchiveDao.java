@@ -28,7 +28,7 @@ public class ArchiveDao extends BaseDao<Archive> {
   private static final String SAVE_SQL = 
           "INSERT INTO t_archive(title,author,html,text,"
           + "publish_datetime,click,thumbnail_path,category_id) "
-          + "VALUES(:title,:author,:html:text,:publish_datetime,:click,:thumbnail_path,:category_id)";
+          + "VALUES(:title,:author,:html,:text,:publish_datetime,:click,:thumbnail_path,:category_id)";
   
   private static final String UPDATE_CLICK_SQL = 
           "UPDATE t_archive SET click=click+1 WHERE id=:id";
@@ -49,7 +49,7 @@ public class ArchiveDao extends BaseDao<Archive> {
   
   private static final String LIST_BY_CATEGORY_ID_PAGINATION_SQL = 
           "SELECT id,title,author,html,text,publish_datetime,click,thumbnail_path,category_id "
-          + "FROM t_archive ORDER BY publish_datetime DESC LIMIT :pagecount, :pagesize";
+          + "FROM t_archive ORDER BY publish_datetime DESC LIMIT :pagecount,:pagesize";
   
   private static final String SIZE_SQL = 
           "SELECT count(*) AS size FROM t_archive";

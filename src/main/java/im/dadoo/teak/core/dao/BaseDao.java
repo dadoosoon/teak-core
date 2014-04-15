@@ -18,7 +18,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
  */
 public class BaseDao<T> {
   
-  
   @Resource
   protected NamedParameterJdbcTemplate jdbcTemplate;
   
@@ -36,7 +35,11 @@ public class BaseDao<T> {
     throw new UnsupportedOperationException("Not supported yet.");
   }
   
-  public void delete(Serializable id) {
+  public void deleteById(Serializable id) {
+    throw new UnsupportedOperationException("Not supported yet.");
+  }
+  
+  public void deleteAll() {
     throw new UnsupportedOperationException("Not supported yet.");
   }
   
