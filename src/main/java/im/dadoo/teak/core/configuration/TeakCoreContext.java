@@ -19,14 +19,14 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
  */
 @Configuration
 @ComponentScan("im.dadoo.teak.core")
-public class Context {
+public class TeakCoreContext {
   
   @Bean(initMethod = "init", destroyMethod = "close")
   public DataSource dataSource() {
     DruidDataSource dataSource = new DruidDataSource();
-    dataSource.setUrl("jdbc:mysql://db.dadoo.im:33066/teak?characterEncoding=utf8&autoReconnect=true");
+    dataSource.setUrl("jdbc:mysql://localhost:3306/teak?characterEncoding=utf8&autoReconnect=true");
     dataSource.setUsername("root");
-    dataSource.setPassword("dadoo2012dadoo");
+    //dataSource.setPassword("dadoo2012dadoo");
     return dataSource;
   }
   
