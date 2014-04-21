@@ -47,6 +47,10 @@ public class ArchiveDao extends BaseDao<Archive> {
           "SELECT id,title,author,html,text,publish_datetime,click,thumbnail_path,category_id "
           + "FROM t_archive ORDER BY publish_datetime DESC LIMIT :limit";
   
+  private static final String LIST_PAGINATION_SQL = 
+          "SELECT id,title,author,html,text,publish_datetime,click,thumbnail_path,category_id "
+          + "FROM t_archive ORDER BY publish_datetime DESC LIMIT :pagecount,:pagesize";
+  
   private static final String LIST_BY_CATEGORY_ID_PAGINATION_SQL = 
           "SELECT id,title,author,html,text,publish_datetime,click,thumbnail_path,category_id "
           + "FROM t_archive ORDER BY publish_datetime DESC LIMIT :pagecount,:pagesize";
@@ -112,7 +116,18 @@ public class ArchiveDao extends BaseDao<Archive> {
   }
   
   public List<Archive> list(Integer limit) {
-    List<Archive> archives = this.jdbcTemplate.query(LIST_LIMIT_SQL, this.baseRowMapper);
+    MapSqlParameterSource sps = new MapSqlParameterSource();
+    sps.addValue("limit", limit);
+    List<Archive> archives = this.jdbcTemplate.query(LIST_LIMIT_SQL, sps, this.baseRowMapper);
+    return archives;
+  }
+  
+  @Override
+  public List<Archive> list(Integer pagecount, Integer pagesize) {
+    MapSqlParameterSource sps = new MapSqlParameterSource();
+    sps.addValue("pagecount", pagecount);
+    sps.addValue("pagesize", pagesize);
+    List<Archive> archives = this.jdbcTemplate.query(LIST_PAGINATION_SQL, sps, this.baseRowMapper);
     return archives;
   }
   
@@ -122,7 +137,7 @@ public class ArchiveDao extends BaseDao<Archive> {
     sps.addValue("pagecount", pagecount);
     sps.addValue("pagesize", pagesize);
     List<Archive> archives = 
-            this.jdbcTemplate.query(LIST_BY_CATEGORY_ID_PAGINATION_SQL, this.baseRowMapper);
+            this.jdbcTemplate.query(LIST_BY_CATEGORY_ID_PAGINATION_SQL, sps, this.baseRowMapper);
     return archives;
   }
   

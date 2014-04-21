@@ -62,6 +62,10 @@ public class ArchiveService {
     return this.archiveDao.list(limit);
   }
   
+  public List<Archive> list(Integer pagecount, Integer pagesize) {
+    return this.archiveDao.list(pagecount, pagesize);
+  }
+  
   public List<Archive> listByCategoryId(Integer categoryId, Integer pagecount, Integer pagesize) {
     return this.archiveDao.listByCategoryId(categoryId, pagecount, pagesize);
   }

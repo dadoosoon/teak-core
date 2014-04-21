@@ -8,7 +8,9 @@ package im.dadoo.teak.core.service;
 
 import im.dadoo.teak.core.dao.CategoryDao;
 import im.dadoo.teak.domain.Category;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -50,6 +52,19 @@ public class CategoryService {
   
   public List<Category> list() {
     return this.categoryDao.list();
+  }
+  
+  public Map<Integer, Category> map() {
+    List<Category> categories = this.categoryDao.list();
+    if (categories != null) {
+      Map<Integer, Category> cm = new HashMap<>();
+      for (Category category : categories) {
+        cm.put(category.getId(), category);
+      }
+      return cm;
+    } else {
+      return null;
+    }
   }
   
   public Integer size() {
