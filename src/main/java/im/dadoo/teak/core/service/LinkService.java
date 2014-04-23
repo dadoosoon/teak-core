@@ -30,6 +30,14 @@ public class LinkService {
     return this.linkDao.save(link);
   }
   
+  public Link update(Integer id, String name, String url, String description) {
+    Link link = this.linkDao.findById(id);
+    link.setName(name);
+    link.setUrl(url);
+    link.setDescription(description);
+    return this.linkDao.update(link);
+  }
+  
   public void deleteById(Integer id) {
     this.linkDao.deleteById(id);
   }

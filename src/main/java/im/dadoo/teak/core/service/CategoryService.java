@@ -38,6 +38,17 @@ public class CategoryService {
     }
   }
   
+  public Category update(Integer id, String name, String description) {
+    Category category = this.categoryDao.findById(id);
+    if (category != null) {
+      category.setName(name);
+      category.setDescription(description);
+      return this.categoryDao.update(category);
+    } else {
+      return category;
+    }
+  }
+  
   public void deleteById(Integer id) {
     this.categoryDao.deleteById(id);
   }

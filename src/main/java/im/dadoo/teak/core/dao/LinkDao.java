@@ -28,6 +28,9 @@ public class LinkDao extends BaseDao<Link>{
   private static final String SAVE_SQL = 
           "INSERT INTO t_link(name,url,description) VALUES(:name,:url,:description)";
   
+  private static final String UPDATE_SQL = 
+          "UPDATE t_link SET name=:name,url=:url,description=:description WHERE id=:id";
+  
   private static final String DELETE_BY_ID_SQL = 
           "DELETE FROM t_link WHERE id=:id";
   
@@ -59,6 +62,17 @@ public class LinkDao extends BaseDao<Link>{
     sps.addValue("description", link.getDescription());
     this.jdbcTemplate.update(SAVE_SQL, sps, holder);
     link.setId(holder.getKey().intValue());
+    return link;
+  }
+  
+  @Override
+  public Link update(Link link) {
+    MapSqlParameterSource sps = new MapSqlParameterSource();
+    sps.addValue("id", link.getId());
+    sps.addValue("name", link.getName());
+    sps.addValue("url", link.getUrl());
+    sps.addValue("description", link.getDescription());
+    this.jdbcTemplate.update(UPDATE_SQL, sps);
     return link;
   }
   
