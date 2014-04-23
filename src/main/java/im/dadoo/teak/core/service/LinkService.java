@@ -34,6 +34,10 @@ public class LinkService {
     this.linkDao.deleteById(id);
   }
   
+  public Link findById(Integer id) {
+    return this.linkDao.findById(id);
+  }
+  
   public List<Link> list() {
     return this.linkDao.list();
   }
