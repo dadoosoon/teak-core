@@ -54,6 +54,10 @@ public class ArchiveService {
     return this.archiveDao.findById(id);
   }
   
+  public void deleteById(Integer id) {
+    this.archiveDao.deleteById(id);
+  }
+  
   public Archive findById(Integer id) {
     return this.archiveDao.findById(id);
   }

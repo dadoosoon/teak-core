@@ -30,6 +30,10 @@ public class LinkService {
     return this.linkDao.save(link);
   }
   
+  public void deleteById(Integer id) {
+    this.linkDao.deleteById(id);
+  }
+  
   public List<Link> list() {
     return this.linkDao.list();
   }

@@ -37,6 +37,9 @@ public class PageDao extends BaseDao<Page> {
           + "publish_datetime=:publish_datetime "
           + "WHERE id=:id";
   
+  private static final String DELETE_BY_ID_SQL = 
+          "DELETE FROM t_page WHERE id=:id";
+  
   private static final String FIND_BY_ID_SQL = 
           "SELECT id,name,title,author,html,text,publish_datetime,click "
           + "FROM t_page WHERE id=:id LIMIT 1";
@@ -90,6 +93,13 @@ public class PageDao extends BaseDao<Page> {
     MapSqlParameterSource sps = new MapSqlParameterSource();
     sps.addValue("id", id);
     this.jdbcTemplate.update(UPDATE_CLICK_SQL, sps);
+  }
+  
+  @Override
+  public void deleteById(Serializable id) {
+    MapSqlParameterSource sps = new MapSqlParameterSource();
+    sps.addValue("id", id);
+    this.jdbcTemplate.update(DELETE_BY_ID_SQL, sps);
   }
   
   @Override

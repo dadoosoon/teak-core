@@ -51,6 +51,10 @@ public class PageService {
     return this.pageDao.findById(id);
   }
   
+  public void deleteById(Integer id) {
+    this.pageDao.deleteById(id);
+  }
+  
   public Page findById(Integer id) {
     return this.pageDao.findById(id);
   }

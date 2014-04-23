@@ -39,6 +39,9 @@ public class ArchiveDao extends BaseDao<Archive> {
           + "category_id=:category_id "
           + "WHERE id=:id";
   
+  private static final String DELETE_BY_ID_SQL = 
+          "DELETE FROM t_archive WHERE id=:id";
+  
   private static final String FIND_BY_ID_SQL = 
           "SELECT id,title,author,html,text,publish_datetime,click,thumbnail_path,category_id "
           + "FROM t_archive WHERE id=:id LIMIT 1";
@@ -101,6 +104,13 @@ public class ArchiveDao extends BaseDao<Archive> {
     MapSqlParameterSource sps = new MapSqlParameterSource();
     sps.addValue("id", id);
     this.jdbcTemplate.update(UPDATE_CLICK_SQL, sps);
+  }
+  
+  @Override
+  public void deleteById(Serializable id) {
+    MapSqlParameterSource sps = new MapSqlParameterSource();
+    sps.addValue("id", id);
+    this.jdbcTemplate.update(DELETE_BY_ID_SQL, sps);
   }
   
   @Override
