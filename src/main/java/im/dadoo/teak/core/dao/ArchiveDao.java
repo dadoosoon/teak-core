@@ -56,7 +56,8 @@ public class ArchiveDao extends BaseDao<Archive> {
   
   private static final String LIST_BY_CATEGORY_ID_PAGINATION_SQL = 
           "SELECT id,title,author,html,text,publish_datetime,click,thumbnail_path,category_id "
-          + "FROM t_archive ORDER BY publish_datetime DESC LIMIT :pagecount,:pagesize";
+          + "FROM t_archive WHERE category_id=:category_id "
+          + "ORDER BY publish_datetime DESC LIMIT :pagecount,:pagesize";
   
   private static final String SIZE_SQL = 
           "SELECT count(*) AS size FROM t_archive";
