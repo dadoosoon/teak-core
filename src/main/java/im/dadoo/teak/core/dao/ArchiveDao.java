@@ -61,6 +61,9 @@ public class ArchiveDao extends BaseDao<Archive> {
   private static final String SIZE_SQL = 
           "SELECT count(*) AS size FROM t_archive";
   
+  private static final String SIZE_BY_CATEGORY_ID_SQL = 
+          "SELECT count(*) AS size FROM t_archive WHERE category_id=:category_id";
+  
   private final RowMapper<Archive> baseRowMapper;
   
   public ArchiveDao() {
@@ -149,6 +152,18 @@ public class ArchiveDao extends BaseDao<Archive> {
     List<Archive> archives = 
             this.jdbcTemplate.query(LIST_BY_CATEGORY_ID_PAGINATION_SQL, sps, this.baseRowMapper);
     return archives;
+  }
+  
+  public Serializable sizeByCategoryId(Integer categoryId) {
+    MapSqlParameterSource sps = new MapSqlParameterSource();
+    sps.addValue("category_id", categoryId);
+    return (Serializable)this.jdbcTemplate.queryForObject(SIZE_BY_CATEGORY_ID_SQL, 
+            sps, new RowMapper<Integer>() {
+      @Override
+      public Integer mapRow(ResultSet rs, int rowNum) throws SQLException {
+        return rs.getInt("size");
+      }
+    });
   }
   
   @Override

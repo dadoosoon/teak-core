@@ -78,4 +78,7 @@ public class ArchiveService {
     return (Integer)this.archiveDao.size();
   }
   
+  public Integer sizeByCategoryId(Integer categoryId) {
+    return (Integer)this.archiveDao.sizeByCategoryId(categoryId);
+  }
 }
